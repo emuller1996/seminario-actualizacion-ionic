@@ -1,0 +1,7 @@
+{
+  "name": "seminario-actualizacion-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
