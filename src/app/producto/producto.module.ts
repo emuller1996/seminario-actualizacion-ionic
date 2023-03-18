@@ -5,11 +5,13 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProductoRoutingModule } from './producto-routing.module';
 import { ProductoListaComponent } from './producto-lista/producto-lista.component';
+import { ProductoCrearComponent } from './producto-crear/producto-crear.component';
 
 
 @NgModule({
   declarations: [
-    ProductoListaComponent
+    ProductoListaComponent,
+    ProductoCrearComponent
   ],
   imports: [
     CommonModule,
