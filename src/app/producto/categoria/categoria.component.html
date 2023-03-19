@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Gestion de Categoria</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <form autocomplete="off">
+            <ion-row class="ion-align-items-center">
+              <ion-col size="8">
+                <ion-item fill="outline">
+                  <ion-label position="floating">Categoria</ion-label>
+                  <ion-input placeholder="LACTEOS, CAMISETA, ETC . . ."></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button  expand="block">Save</ion-button>
+
+              </ion-col>
+            </ion-row>
+
+
+          </form>
+        </ion-col>
+        <ion-col size="8">
+          <ion-list>
+            <ion-item>
+              <ion-label>Pokémon Yellow</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Mega Man X</ion-label>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+</ion-content>
