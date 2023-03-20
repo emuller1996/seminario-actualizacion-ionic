@@ -7,7 +7,8 @@ import { ProductoRoutingModule } from './producto-routing.module';
 import { ProductoListaComponent } from './producto-lista/producto-lista.component';
 import { ProductoCrearComponent } from './producto-crear/producto-crear.component';
 import { CategoriaComponent } from './categoria/categoria.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,10 @@ import { CategoriaComponent } from './categoria/categoria.component';
   imports: [
     CommonModule,
     ProductoRoutingModule,
-    IonicModule
+    IonicModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ProductoModule { }

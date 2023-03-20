@@ -18,37 +18,41 @@
     <ion-grid>
       <ion-row>
         <ion-col size="4">
-          <form autocomplete="off">
+          <form
+            [formGroup]="formCategory"
+            autocomplete="off"
+            (ngSubmit)="onSaveCategory()"
+          >
             <ion-row class="ion-align-items-center">
               <ion-col size="8">
                 <ion-item fill="outline">
                   <ion-label position="floating">Categoria</ion-label>
-                  <ion-input placeholder="LACTEOS, CAMISETA, ETC . . ."></ion-input>
+                  <ion-input
+                    placeholder="LACTEOS, CAMISETA, ETC . . ."
+                    name="nombre"
+                    formControlName="nombre"
+                  ></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col size="4">
-                <ion-button  expand="block">Save</ion-button>
-
+                <ion-button
+                  [disabled]="formCategory.invalid"
+                  type=""
+                  expand="block"
+                  >Save</ion-button
+                >
               </ion-col>
             </ion-row>
-
-
           </form>
         </ion-col>
         <ion-col size="8">
           <ion-list>
-            <ion-item>
-              <ion-label>Pokémon Yellow</ion-label>
+            <ion-item *ngFor="let c of listCategories">
+              <ion-label>{{ c.nombre }}</ion-label>
             </ion-item>
-            <ion-item>
-              <ion-label>Mega Man X</ion-label>
-            </ion-item>
-
           </ion-list>
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </div>
-
 </ion-content>
