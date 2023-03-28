@@ -15,8 +15,7 @@ export class ProductoListaComponent implements OnInit {
   nombreSearc = new FormControl('');
 
   constructor(private productoService: ProductoService) {}
-
-  ngOnInit() {
+  ionViewDidEnter(){
     this.isLoading = true;
 
     this.productoService.getAllProductos().subscribe({
@@ -29,6 +28,10 @@ export class ProductoListaComponent implements OnInit {
         console.log(error.message);
       },
     });
+
+  }
+  ngOnInit() {
+
   }
 
   onSearchProductByName() {
