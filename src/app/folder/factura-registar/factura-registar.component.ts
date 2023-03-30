@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Factura } from 'src/app/models/factura.model';
 import { ProductoFactura } from 'src/app/models/facturadetail.model';
 import { Producto } from 'src/app/models/product.models';
+import { FacturaService } from 'src/app/services/factura.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
@@ -15,7 +17,10 @@ export class FacturaRegistarComponent implements OnInit {
   listaProductosFactura: ProductoFactura[] = [];
   totalFactura: number = 0;
   listaProductosObservable: Observable<Producto[]> = new Observable();
-  constructor(private serviceProducto: ProductoService) {}
+  constructor(
+    private serviceProducto: ProductoService,
+    private facturaService: FacturaService
+  ) {}
 
   ngOnInit() {
     console.log('Monte');
@@ -33,6 +38,18 @@ export class FacturaRegistarComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  onSaveFactura(): void {
+    this.facturaService.saveFactura(
+      {
+        total: this.totalFactura,
+        subtotal: this.totalFactura,
+        fecha: new Date().toISOString(),
+        hora: '20:00',
+      },
+      this.listaProductosFactura
+    );
   }
 
   onChangeNameProduct() {
