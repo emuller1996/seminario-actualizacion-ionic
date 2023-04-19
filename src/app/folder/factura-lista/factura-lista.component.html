@@ -21,17 +21,21 @@
       </ion-row>
     </ion-grid>
 
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="9">
-          <ion-item fill="outline">
-            <ion-label position="floating">Buscar Factura</ion-label>
-            <ion-input
-              placeholder="Ingrese Registro"
-            ></ion-input> 
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-list>
+      <ion-item *ngFor="let f of listaFactura">
+        <ion-label class="label">
+          <span>{{f.id}}</span>
+
+          <small> Total : </small> {{f.total | number }}
+          <small> Hora : </small> {{f.hora}}
+          <ion-button size="small" color="dark">Ver Detalle</ion-button>
+        </ion-label>
+      </ion-item>
+      
+    </ion-list>
+
+    <ion-infinite-scroll >
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

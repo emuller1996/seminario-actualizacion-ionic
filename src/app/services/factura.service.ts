@@ -8,7 +8,7 @@ import { ToastController } from '@ionic/angular';
   providedIn: 'root',
 })
 export class FacturaService {
-  URL_BASE: String = 'http://localhost:3000';
+  URL_BASE: String = 'http://15.228.232.99:3000';
 
   constructor(
     private http: HttpClient,

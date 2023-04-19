@@ -1,0 +1,21 @@
+.label{
+    text-align: center ;
+    span{
+        text-align: start;
+        float: left;
+        font-size:0.7em;
+        color:#a4a4a4;
+    }
+    small{
+        font-size:0.7em;
+        color:#a4a4a4;
+    }
+    
+    ion-button{
+        float: right;
+    }
+    &:hover{
+
+        background: #d9e6ff;
+    }
+}
