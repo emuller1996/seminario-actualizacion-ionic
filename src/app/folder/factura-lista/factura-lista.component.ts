@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FacturaService } from 'src/app/services/factura.service';
 
 @Component({
   selector: 'app-factura-lista',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FacturaListaComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private facturaService: FacturaService ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(new Date().toJSON().substring(0,11)+"00:00:00.000Z")
+  this.facturaService.getFacturaByDay().subscribe(data => {console.log(data)})
+  }
 
 }

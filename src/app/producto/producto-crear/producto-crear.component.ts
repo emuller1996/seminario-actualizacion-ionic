@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category.model';
 import { ProductoService } from 'src/app/services/producto.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-producto-crear',
@@ -22,7 +23,7 @@ export class ProductoCrearComponent implements OnInit {
     estado: new FormControl(true),
   });
 
-  constructor(private productoService: ProductoService) {}
+  constructor(private productoService: ProductoService,private toastController: ToastController) {}
 
   ngOnInit() {
     this.productoService
@@ -30,13 +31,20 @@ export class ProductoCrearComponent implements OnInit {
       .subscribe((data) => (this.listaCategoria = data));
   }
 
-  onSaveProducto() {
+   onSaveProducto() {
     console.log('onSaveProducto');
     console.log(this.formProducto.value);
     this.productoService.saveProducto(this.formProducto.value).subscribe({
-      next: (data) => {
+      next:async (data) => {
         console.log(data);
         this.formProducto.reset();
+        const toast = await this.toastController.create({
+          message: 'Producto Registrado!',
+          duration: 1500,
+          position: 'top'
+        });
+    
+        await toast.present();
       },
       error : (error) => { console.log(error.message)}
     });

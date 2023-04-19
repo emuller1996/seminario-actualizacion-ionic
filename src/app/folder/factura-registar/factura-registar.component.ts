@@ -41,6 +41,7 @@ export class FacturaRegistarComponent implements OnInit {
   }
 
   onSaveFactura(): void {
+    
     this.facturaService.saveFactura(
       {
         total: this.totalFactura,
@@ -49,7 +50,8 @@ export class FacturaRegistarComponent implements OnInit {
         hora: '20:00',
       },
       this.listaProductosFactura
-    );
+    )
+    this.listaProductosFactura = []
   }
 
   onChangeNameProduct() {
