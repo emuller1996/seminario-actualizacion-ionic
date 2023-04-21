@@ -17,17 +17,21 @@
   <div id="container">
     <ion-grid class="px-4">
       <ion-row>
-        <ion-col size="6">
-          <ion-item fill="outline">
-            <ion-label position="floating">Buscar Producto</ion-label>
-            <ion-input
-              [ngModel]="nombre"
-              (ngModelChange)="(onChangeNameProduct)"
-              placeholder="Ingrese en nombre "
-            ></ion-input>
-          </ion-item>
+        <ion-col size-md="6" size="12">
 
-          <ion-row class="" *ngFor="let p of listaProductosObservable | async">
+          
+              <ion-item fill="outline" class="flex">
+                <ion-label position="floating">Buscar Producto</ion-label>
+                <ion-input
+                  [(ngModel)]="nombre"
+                  (ngModelChange)="(onChangeNameProduct())"
+                  placeholder="Ingrese en nombre "
+                ></ion-input>
+              </ion-item>
+
+    
+
+          <ion-row class="" *ngFor="let p of listaProductos ">
             <ion-col size="6">
               <ion-label> {{ p.nombre }} </ion-label>
             </ion-col>
@@ -41,7 +45,7 @@
             </ion-col>
           </ion-row>
         </ion-col>
-        <ion-col size="6">
+        <ion-col size-md="6" size="12">
           <ion-card>
             <ion-card-content>
               <p>Articulos Selecionados</p>
@@ -77,6 +81,11 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
+
+
+        <ion-infinite-scroll disabled="true">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
       </ion-row>
     </ion-grid>
 

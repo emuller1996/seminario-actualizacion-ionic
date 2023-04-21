@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ToastController } from '@ionic/angular';
+import { Observable, async } from 'rxjs';
 import { Factura } from 'src/app/models/factura.model';
 import { ProductoFactura } from 'src/app/models/facturadetail.model';
 import { Producto } from 'src/app/models/product.models';
@@ -19,17 +20,22 @@ export class FacturaRegistarComponent implements OnInit {
   listaProductosObservable: Observable<Producto[]> = new Observable();
   constructor(
     private serviceProducto: ProductoService,
-    private facturaService: FacturaService
+    private facturaService: FacturaService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
     console.log('Monte');
-    this.getProductByName();
+    this.getProductByName(this.nombre);
   }
 
-  async getProductByName() {
-    this.listaProductosObservable = this.serviceProducto.getAllProductos();
-    this.serviceProducto.getAllProductosXNombre('').subscribe({
+  onIonInfinite(){
+    console.log('nada')
+  }
+
+  async getProductByName(name:string) {
+    //this.listaProductosObservable = this.serviceProducto.getAllProductos();
+    this.serviceProducto.getAllProductosXNombre(name).subscribe({
       next: (data) => {
         this.listaProductos = data;
         console.log(data);
@@ -40,22 +46,33 @@ export class FacturaRegistarComponent implements OnInit {
     });
   }
 
-  onSaveFactura(): void {
+  async onSaveFactura(): Promise<void> {
     
-    this.facturaService.saveFactura(
+    const s =  await this.facturaService.saveFacturaTwo(
       {
         total: this.totalFactura,
         subtotal: this.totalFactura,
         fecha: new Date().toISOString(),
-        hora: '20:00',
+        hora: `${new Date().getHours()}:${new Date().getMinutes()}`,
       },
       this.listaProductosFactura
     )
-    this.listaProductosFactura = []
+    console.log(s)
+    if(s){
+      this.listaProductosFactura = []
+      const toast = await this.toastController.create({
+        message: 'Factura Registrada!',
+        duration: 1500,
+        position: 'top',
+      });
+      await toast.present();
+      this.totalFactura=0
+    }
   }
 
   onChangeNameProduct() {
     console.log(this.nombre);
+    this.getProductByName(this.nombre)
   }
 
   onChangeCantidadProducto(id: number) {

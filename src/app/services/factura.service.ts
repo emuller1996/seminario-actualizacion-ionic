@@ -52,6 +52,35 @@ export class FacturaService {
       });
   }
 
+  async saveFacturaTwo(f: any, p: ProductoFactura[]) {
+    //console.log(f);
+    //console.log(p);
+
+    try {
+      var idFAct: any;
+
+      const result = await this.http
+        .post<{ id: number }>(`${this.URL_BASE}/facturas`, f)
+        .toPromise();
+
+      console.log(result);
+      idFAct = result?.id;
+
+      const primises = p.map(async (pf) => {
+        //console.error(pf);
+        return this.http
+          .post(`${this.URL_BASE}/facturas/${idFAct}/factura-productos`, pf)
+          .toPromise();
+      });
+
+      await Promise.all(primises);
+      console.log(primises);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   getFacturaByDay() {
     var filterObject = {
       where: {

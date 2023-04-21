@@ -18,9 +18,7 @@ export class ProductoCrearComponent implements OnInit {
     costo: new FormControl('', [Validators.required]),
     existencias: new FormControl('', [Validators.required]),
     categoriaId: new FormControl(1, [Validators.required]),
-    detalle: new FormControl('',[Validators.required]),
-    fechaCreacion: new FormControl(new Date().toJSON()),
-    estado: new FormControl(true),
+    detalle: new FormControl('',[Validators.required])
   });
 
   constructor(private productoService: ProductoService,private toastController: ToastController) {}
@@ -34,7 +32,8 @@ export class ProductoCrearComponent implements OnInit {
    onSaveProducto() {
     console.log('onSaveProducto');
     console.log(this.formProducto.value);
-    this.productoService.saveProducto(this.formProducto.value).subscribe({
+    
+    this.productoService.saveProducto(Object.assign(this.formProducto.value,{fechaCreacion : new Date().toJSON() , estado : true  } )).subscribe({
       next:async (data) => {
         console.log(data);
         this.formProducto.reset();
