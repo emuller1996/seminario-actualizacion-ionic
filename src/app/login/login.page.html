@@ -1,16 +1,36 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Iniciar Sesion</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
-  <ion-input type="email" fill="solid" label="Email" labelPlacement="floating"helperText="Ingrese un Email valido" errorText="Invalid email" color="success" ngModel email ></ion-input>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Inicio de Seccion </ion-card-title>
+      <ion-card-subtitle> - </ion-card-subtitle>
+    </ion-card-header>
 
-  <ion-item>
-    <ion-input color="success" label="Password input" type="password" value="password" ngModel password ></ion-input>
-  </ion-item>
-  <ion-list>
-    <ion-button color="success" (click)="onLogin()"> Conectar</ion-button>
-  </ion-list>
+    <ion-card-content>
+      <ion-input
+        type="email"
+        fill="solid"
+        label="Email"
+        labelPlacement="floating"
+        helperText="Ingrese un Email valido"
+        errorText="Invalid email"
+        color="success"
+        [(ngModel)]="email"
+      ></ion-input>
+
+      <ion-item>
+        <ion-input
+          color="success"
+          label="Password input"
+          type="password"
+          value="password"
+          [(ngModel)]="password"
+        ></ion-input>
+      </ion-item>
+      <ion-list>
+        <ion-button color="success" (click)="onLogin()"> Conectar</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

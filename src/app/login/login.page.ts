@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { loginService } from '../services/login.service';
 import { Preferences } from '@capacitor/preferences';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,20 +14,24 @@ export class LoginPage implements OnInit {
   public password: string = '123456789';
 
   constructor(
-    public loginService: loginService
+    public loginService: loginService,
+    private router:Router
   ) { }
 
   ngOnInit() {
+
+
   }
 
   onLogin() {
     this.loginService.logearse(this.email, this.password).then(async (res)=>{
       console.log(res.data.token)
- 
+
         await Preferences.set({
           key: 'token',
           value: res.data.token,
         });
+        this.router.navigate(["productos"]);
       this.onQuienSoy();
     })
     }
