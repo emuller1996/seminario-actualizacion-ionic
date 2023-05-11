@@ -12,13 +12,13 @@ export class loginService {
   logearse = async (email: string,password: string) => {
     const options = {
       url: environment.backend + 'users/login/',
-      headers: {  
+      headers: {
        accept: 'application/json',
        'Content-Type': 'application/json',
       },
       data: { email: email, password: password },
     };
-  
+
     const response: HttpResponse = await Http.post(options);
     return response;
   };
@@ -27,7 +27,7 @@ export class loginService {
 QsoyYo = async (token: string) => {
   const options = {
     url: environment.backend + 'whoAmI',
-    headers: {  
+    headers: {
      accept: 'application/json',
      'Content-Type': 'application/json',
      'Authorization': 'Bearer ' + token

@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DasboardLayoutComponent  implements OnInit {
   public appPages = [
-    { title: 'Registra Factura', url: '/facturas/registrar', icon: 'mail' },
-    { title: 'Listas Factura', url: '/facturas/listar', icon: 'paper-plane' },
-    { title: 'Productos', url: '/productos/', icon: 'paper-plane' },
+    { title: 'Registra Factura', url: '/facturas/registrar', icon: 'pricetag'},
+    { title: 'Listas Factura', url: '/facturas/listar', icon: 'receipt' },
+    { title: 'Productos', url: '/productos/', icon: 'cube' },
   ];
 
   constructor() { }

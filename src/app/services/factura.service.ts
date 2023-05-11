@@ -8,7 +8,7 @@ import { ToastController } from '@ionic/angular';
   providedIn: 'root',
 })
 export class FacturaService {
-  URL_BASE: String = 'http://15.228.232.99:3000';
+  URL_BASE: String = 'http://localhost:3000';
 
   constructor(
     private http: HttpClient,
@@ -81,15 +81,21 @@ export class FacturaService {
     }
   }
 
-  getFacturaByDay() {
+  getFacturaByDayByUser( id:string ) {
+
+
     var filterObject = {
       where: {
         fecha: { gt: `${new Date().toJSON().substring(0, 11)}00:00:00.000Z` },
+        UserId : id
       },
       include: [
         {
           relation: 'FACTURAPRODUCTOS',
         },
+        {
+          relation : 'USER'
+        }
       ],
     };
     const filter = JSON.stringify(filterObject);

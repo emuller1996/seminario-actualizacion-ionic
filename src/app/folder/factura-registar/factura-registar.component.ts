@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Preferences } from '@capacitor/preferences';
 import { ToastController } from '@ionic/angular';
 import { Observable, async } from 'rxjs';
 import { Factura } from 'src/app/models/factura.model';
 import { ProductoFactura } from 'src/app/models/facturadetail.model';
 import { Producto } from 'src/app/models/product.models';
 import { FacturaService } from 'src/app/services/factura.service';
+import { loginService } from 'src/app/services/login.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
@@ -21,7 +23,8 @@ export class FacturaRegistarComponent implements OnInit {
   constructor(
     private serviceProducto: ProductoService,
     private facturaService: FacturaService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    public loginService: loginService
   ) {}
 
   ngOnInit() {
@@ -47,27 +50,44 @@ export class FacturaRegistarComponent implements OnInit {
   }
 
   async onSaveFactura(): Promise<void> {
-    
-    const s =  await this.facturaService.saveFacturaTwo(
-      {
-        total: this.totalFactura,
-        subtotal: this.totalFactura,
-        fecha: new Date().toISOString(),
-        hora: `${new Date().getHours()}:${new Date().getMinutes()}`,
-      },
-      this.listaProductosFactura
-    )
-    console.log(s)
-    if(s){
-      this.listaProductosFactura = []
-      const toast = await this.toastController.create({
-        message: 'Factura Registrada!',
-        duration: 1500,
-        position: 'top',
-      });
-      await toast.present();
-      this.totalFactura=0
-    }
+
+    const { value } = await Preferences.get({ key: 'token' });
+
+
+
+    if(value)
+    this.loginService.QsoyYo(value).then(async (res)=>{
+
+
+
+      const s =  await this.facturaService.saveFacturaTwo(
+        {
+          total: this.totalFactura,
+          subtotal: this.totalFactura,
+          fecha: new Date().toISOString(),
+          hora: `${new Date().getHours()}:${new Date().getMinutes()}`,
+          UserId :res.data
+        },
+        this.listaProductosFactura
+      )
+      console.log(s)
+      if(s){
+        this.listaProductosFactura = []
+        const toast = await this.toastController.create({
+          message: 'Factura Registrada!',
+          duration: 1500,
+          position: 'top',
+        });
+        await toast.present();
+        this.totalFactura=0
+      }
+
+
+
+    })
+
+
+
   }
 
   onChangeNameProduct() {
